@@ -15,6 +15,7 @@ class Dish(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='dishes/', blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
