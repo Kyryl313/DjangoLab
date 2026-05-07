@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h1>{{ message }}</h1>
+{% extends "main/base.html" %}
 
-    <h3> Сторінки: </h3>
-    <a href="/about/"> Про нас </a><br>
-</body>
-</html>
+{% block content %}
+
+<h1 class="menu-title">
+    {{ title }}
+</h1>
+
+<div class="dish-container">
+
+    {% for dish in dishes %}
+        <div class="dish-card">
+            <h2>{{ dish.name }}</h2>
+
+            <p class="price">
+                {{ dish.price }} грн
+            </p>
+
+            <button>
+                Замовити
+            </button>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Café Alps</title>
+
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        Café Alps
+    </div>
+
+    <nav>
+        <a href="{% url 'home' %}">Всі</a>
+
+        {% for category in categories %}
+            <a href="{% url 'category' category.id %}">
+                {{ category.name }}
+            </a>
+        {% endfor %}
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>© 2026 Café Alps</p>
+    <p>Доставка їжі та напоїв</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-family: Bahnschrift, sans-serif;
+    background-color: #E5D8D1;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+
+header {
+    background-color: #66493A;
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    padding: 8px 14px;
+    background-color: #8D6E63;
+    border-radius: 8px;
+}
+
+nav a:hover {
+    background-color: #6D4C41;
+}
+
+/* CONTENT */
+
+main {
+    padding: 30px;
+    flex: 1;
+}
+
+.menu-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.dish-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* CARD */
+
+.dish-card {
+    background-color: #FFF8E7;
+    width: 250px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    text-align: center;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #5D4037;
+}
+
+button {
+    background-color: #6D4C41;
+    color: white;
+
+    border: none;
+    padding: 10px 20px;
+
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 40px;
+
+    background-color: #66493A;
+    color: white;
+
+    text-align: center;
+    padding: 5px;
+}
