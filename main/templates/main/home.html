@@ -2,37 +2,121 @@
 
 {% block content %}
 
-<h1 class="menu-title">
-    {{ title }}
-</h1>
+<div class="layout">
 
-<div class="dish-container">
+    <aside class="sidebar">
 
-    {% for dish in dishes %}
-    <a href="{% url 'dish_detail' dish.id %}">
-        <div class="dish-card">
-            <div class="dish-image">
+        <a href="{% url 'home' %}"
+           class="category-link {% if not selected_category %}active-category{% endif %}">
+            Все меню
+        </a>
 
-                {% if dish.image %}
-                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
-                {% else %}
-                🍕
-                {% endif %}
+        {% for category in categories %}
 
-            </div>
-            <h2>{{ dish.name }}</h2>
+            <a href="{% url 'category' category.id %}"
+               class="category-link {% if selected_category.id == category.id %}active-category{% endif %}">
 
-            <p class="price">
-                {{ dish.price }} грн
+                {{ category.name }}
+
+            </a>
+
+        {% endfor %}
+
+    </aside>
+
+    <section class="content">
+
+        <h1 class="menu-title">
+            {{ title }}
+        </h1>
+
+        <div class="dish-container">
+
+            {% for dish in dishes %}
+
+                <a href="{% url 'dish_detail' dish.id %}" class="dish-link">
+
+                    <div class="dish-card">
+
+                        <div class="dish-image">
+
+                            {% if dish.image %}
+                                <img src="{{ dish.image.url }}">
+                            {% else %}
+                                ☕
+                            {% endif %}
+
+                        </div>
+
+                        <h2>{{ dish.name }}</h2>
+
+                        <p class="price">
+                            {{ dish.price }} грн
+                        </p>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+    <aside class="right-sidebar">
+
+        <div class="info-card">
+
+            <h2>Інформація</h2>
+
+            <p><strong>Години:</strong><br>
+        11:00 – 21:00</p>
+
+            <p><strong>Телефон:</strong><br>
+        +380 95 659 56 34</p>
+
+            <p><strong>Адреса:</strong><br>
+        Kamurocho District</p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h2>Кошик</h2>
+
+            <p>
+                Товарів у кошику:
+                {{ cart_count }}
             </p>
 
-            <button>
-                Замовити
-            </button>
-        </div>
-    </a>
-    {% endfor %}
+            <a href="{% url 'cart' %}">
 
+                <button>
+                    Відкрити кошик
+                </button>
+
+            </a>
+
+        </div>
+        <div class="info-card">
+
+            <h2>Новини про оновлення меню</h2>
+
+            <form method="POST">
+
+            {% csrf_token %}
+
+                <input type="email"
+                name="email"
+                placeholder="Ваш email">
+
+                    <button type="submit">
+                        Підписатись
+                    </button>
+            </form>
+
+        </div>
+    </aside>
 </div>
 
 {% endblock %}

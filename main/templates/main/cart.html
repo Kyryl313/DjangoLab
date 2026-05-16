@@ -1,0 +1,105 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<h1 class="menu-title">
+    Кошик
+</h1>
+
+<div class="cart-container">
+
+    {% if cart_items %}
+
+        {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <div class="cart-left">
+
+                    {% if item.dish.image %}
+                        <img src="{{ item.dish.image.url }}"
+                             class="cart-image">
+                    {% endif %}
+
+                </div>
+
+                <div class="cart-center">
+
+                    <h2>{{ item.dish.name }}</h2>
+
+                    <form method="POST" action="{% url 'update_cart' item.dish.id %}">
+                        {% csrf_token %}
+
+                        <input type="number"
+                               name="quantity"
+                               value="{{ item.quantity }}"
+                               min="0">
+
+                        <button type="submit">
+                            Підтвердити
+                        </button>
+                    </form>
+                    <p>
+                        {{ item.item_total }} грн
+                    </p>
+
+                </div>
+
+                <div class="cart-right">
+
+                    <a href="{% url 'remove_from_cart' item.dish.id %}">
+
+                        <button>
+                            Видалити
+                        </button>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+        <hr>
+
+        <h2>
+            Разом: {{ total }} грн
+        </h2>
+
+        <div class="cart-buttons">
+
+            <a href="{% url 'home' %}">
+                <button>
+                    Продовжити покупки
+                </button>
+            </a>
+
+            <a href="{% url 'clear_cart' %}">
+                <button>
+                    Очистити кошик
+                </button>
+            </a>
+            <a href="{% url 'checkout' %}">
+                <button>Оформити замовлення</button>
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <p>
+            Кошик порожній
+        </p>
+
+        <a href="{% url 'home' %}">
+            <button>
+                До меню
+            </button>
+        </a>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
